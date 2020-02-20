@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+  api:
+    build:
+      context: .
+    restart: on-failure
+    volumes:
+      - ./:/usr/src/api:delegated
+    ports:
+      - target: 8080
+        published: 90
+        protocol: tcp
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: admin
+      POSTGRES_USER: admin
+      POSTGRES_DB: rust_api
+
+
